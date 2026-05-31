@@ -185,12 +185,12 @@ class NxObfusGUI(Window):
         text = load_file_dialog()
         if text:
             if tab == 0:
-                self.obf_input.delete("1.0", tk.END)
-                self.obf_input.insert("1.0", text)
+                self.obf_input[1].delete("1.0", tk.END)
+                self.obf_input[1].insert("1.0", text)
                 self.log.log(f"Loaded {len(text)} chars into Obfuscate input")
             elif tab == 1:
-        self.deobf_input[1].delete("1.0", tk.END)
-                self.deobf_input.insert("1.0", text)
+                self.deobf_input[1].delete("1.0", tk.END)
+                self.deobf_input[1].insert("1.0", text)
                 self.log.log(f"Loaded {len(text)} chars into Deobfuscate input")
     
     def _menu_save_output(self):
