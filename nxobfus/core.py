@@ -5,7 +5,7 @@ Composable multi-round obfuscation with named strategies.
 
 from typing import List, Tuple
 from .strategies import TokenStrategy, IndexStrategy
-from .keys import Keyfile
+from .keys import NxObfusConfig
 from . import charset
 
 
@@ -52,14 +52,6 @@ def deobfuscate(text: str, rounds: List[Tuple[str, str]], seed: int | None = Non
 
 
 def generate_key(key_path, strategy_name: str, pool_name: str, seed: int | None = None):
-    pool = _resolve_pool(pool_name)
-    strat_cls = STRATEGY_MAP[strategy_name]
-    strat = strat_cls(pool, seed=seed)
-    key = Keyfile(
-        strategy_name=strategy_name,
-        char_pool=strat.char_pool,
-        source_pool=strat.source_pool if hasattr(strat, "source_pool") else strat.tokens,
-        seed=seed,
-    )
-    key.save(key_path)
-    return key
+    config = NxObfusConfig(seed=seed, rounds=[(strategy_name, pool_name)])
+    config.save(key_path)
+    return config

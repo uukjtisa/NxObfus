@@ -6,11 +6,11 @@ Provides composable character-substitution obfuscation.
 Not encryption. Just obfuscation. Honestly named. ✨
 """
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 from .core import obfuscate, deobfuscate, generate_key
 from .strategies import TokenStrategy, IndexStrategy
-from .keys import Keyfile
+from .keys import NxObfusConfig
 from .charset import BASIC, EXTENDED
 
 __all__ = [
@@ -19,7 +19,7 @@ __all__ = [
     "generate_key",
     "TokenStrategy",
     "IndexStrategy",
-    "Keyfile",
+    "NxObfusConfig",
     "BASIC",
     "EXTENDED",
 ]
