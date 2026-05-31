@@ -1,13 +1,39 @@
 import tkinter as tk
-from ttkbootstrap.widgets import ttk
-from ttkbootstrap.constants import *
 from . import charset
 
 
-class CharsetPreview(ttk.LabelFrame):
+class CharsetPreview(tk.LabelFrame):
     def __init__(self, parent, **kwargs):
-        super().__init__(parent, text="Character Set Preview", padding=6, **kwargs)
-        self._text = tk.Text(self, height=4, wrap=tk.WORD, state=tk.DISABLED, font=("Consolas", 9))
+        from .gui_theme import palette
+        self.COL = palette()
+        COL = self.COL
+        
+        super().__init__(
+            parent,
+            text=" Character Set Preview ",
+            bg=COL["bg"],
+            fg=COL["accent"],
+            font=("Segoe UI Variable", 9, "bold"),
+            padx=8,
+            pady=6,
+            **kwargs,
+        )
+        self.configure(highlightbackground=COL["border"], highlightthickness=1, bd=0)
+        
+        self._text = tk.Text(
+            self,
+            height=4,
+            wrap=tk.WORD,
+            state=tk.DISABLED,
+            font=("Consolas", 9),
+            bg=COL["surface"],
+            fg=COL["text_dim"],
+            selectbackground=COL["accent_secondary"],
+            selectforeground="#ffffff",
+            relief="flat",
+            padx=6,
+            pady=4,
+        )
         self._text.pack(fill=tk.BOTH, expand=True)
 
     def show_pool(self, pool_name: str):

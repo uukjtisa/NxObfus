@@ -15,11 +15,11 @@ def tk_root():
 
 class TestGUIModules:
     def test_import_gui_theme(self):
-        from nxobfus.gui_theme import get_style, toggle_theme, is_dark, retheme
+        from nxobfus.gui_theme import get_style, refresh_style, is_dark, palette
         assert callable(get_style)
-        assert callable(toggle_theme)
+        assert callable(refresh_style)
         assert callable(is_dark)
-        assert callable(retheme)
+        assert callable(palette)
 
     def test_import_gui_helpers(self):
         from nxobfus.gui_helpers import load_file_dialog, save_file_dialog, copy_to_clipboard
@@ -72,12 +72,12 @@ class TestGUIModules:
         assert builder.get_rounds() == rounds
 
     def test_dark_mode_toggle(self):
-        from nxobfus.gui_theme import toggle_theme, is_dark
-        before = is_dark()
-        toggle_theme()
-        assert is_dark() != before
-        toggle_theme()
-        assert is_dark() == before
+        from nxobfus.gui_theme import is_dark, palette
+        assert is_dark() is True
+        p = palette()
+        assert "accent" in p
+        assert "bg" in p
+        assert "text" in p
 
     def test_charset_preview_basic(self, tk_root):
         from nxobfus.gui_preview import CharsetPreview
